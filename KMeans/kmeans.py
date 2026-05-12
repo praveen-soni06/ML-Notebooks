@@ -39,3 +39,6 @@ class KMeans:
         for row in X:
             for centroid in self.centroids:
                 distances.append(np.sqrt(np.dot(row-centroid, row-centroid)))
+            min_distance = min(distances)
+            index_pos = distances.index(min_distance)
+            cluster_group.append(index_pos)
