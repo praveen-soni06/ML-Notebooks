@@ -22,7 +22,7 @@ class KMeans:
             old_centroids = self.centroids
 
             # move centroids
-            self.centroids = self.move_cemntroids(X, cluster_group)
+            self.centroids = self.move_centroids(X, cluster_group)
 
             # check finish
             if (old_centroids == self.centroids).all():
@@ -42,3 +42,16 @@ class KMeans:
             min_distance = min(distances)
             index_pos = distances.index(min_distance)
             cluster_group.append(index_pos)
+            distances.clear()
+
+        return np.array(cluster_group)
+
+    def move_centroids(self,X,cluster_group):
+
+        new_centroids = []
+        cluster_type = np.unique(cluster_group)
+
+        for type in cluster_type:
+            new_centroids.append(X[cluster_group == type].mean(axis=0))
+
+        return np.array(new_centroids)
