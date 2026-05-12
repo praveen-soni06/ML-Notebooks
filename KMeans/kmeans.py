@@ -34,4 +34,8 @@ class KMeans:
     def assign_cluster(self,X):
 
         cluster_group = []
-        difference = []
+        distances = []
+
+        for row in X:
+            for centroid in self.centroids:
+                distances.append(np.sqrt(np.dot(row-centroid, row-centroid)))
